@@ -5,6 +5,8 @@ import { useRef } from "react";
 import type { PointerEvent } from "react";
 import { flowItems } from "@/data/flow";
 import type { FlowItem } from "@/types/flow";
+import { motion } from "framer-motion";
+import PageWrapper from "@/component/PageWrapper";
 
 const statusLabel: Record<FlowItem["status"], string> = {
   done: "已完成",
@@ -66,21 +68,17 @@ export default function TimelinePage() {
   }
 
   return (
+    <PageWrapper>
     <main className="relative h-screen w-screen overflow-hidden bg-neutral-950 text-white">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.12),transparent_30%),radial-gradient(circle_at_bottom_right,rgba(255,255,255,0.08),transparent_35%)]" />
 
       <section className="relative flex h-full w-full flex-col px-10 py-8">
         <header className="flex items-start justify-between gap-8">
           <div>
-            <p className="text-sm text-neutral-400">CenFlow Board</p>
 
             <h1 className="mt-2 text-5xl font-bold tracking-tight">
-              Project Flow Timeline
+              Timeline
             </h1>
-
-            <p className="mt-4 max-w-2xl text-sm leading-6 text-neutral-400">
-              横向展示项目状态。按住鼠标左键可拖动查看，鼠标悬停卡片可查看完整详情。
-            </p>
           </div>
 
           <Link
@@ -100,7 +98,7 @@ export default function TimelinePage() {
             onPointerMove={handlePointerMove}
             onPointerUp={handlePointerUp}
             onPointerCancel={handlePointerUp}
-            className="relative h-full cursor-grab overflow-x-auto overflow-y-visible active:cursor-grabbing select-none"
+            className="timeline-scroller scrollbar-none relative h-full cursor-grab overflow-x-auto overflow-y-visible active:cursor-grabbing select-none"
           >
             <div className="relative flex h-full min-w-max items-center px-24">
               <div className="absolute left-24 right-24 top-1/2 h-px -translate-y-1/2 bg-neutral-700" />
@@ -202,5 +200,6 @@ export default function TimelinePage() {
         </section>
       </section>
     </main>
+    </PageWrapper>
   );
 }

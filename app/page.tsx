@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { flowItems } from "@/data/flow";
 import type { FlowItem } from "@/types/flow";
+import PageWrapper from "@/component/PageWrapper";
 
 const statusLabel: Record<FlowItem["status"], string> = {
   done: "已完成",
@@ -29,8 +30,8 @@ export default function Home() {
           flowItems.reduce((sum, item) => sum + item.progress, 0) /
             flowItems.length,
         );
-
   return (
+    <PageWrapper>
     <main className="min-h-screen bg-neutral-950 px-8 py-10 text-white">
       <section className="mx-auto max-w-7xl">
         <header className="mb-10 flex flex-wrap items-start justify-between gap-6">
@@ -77,6 +78,7 @@ export default function Home() {
         </section>
       </section>
     </main>
+    </PageWrapper>
   );
 }
 
@@ -175,5 +177,6 @@ function FlowCard({ item }: { item: FlowItem }) {
         </div>
       )}
     </article>
+    
   );
 }
